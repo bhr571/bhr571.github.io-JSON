@@ -90,6 +90,18 @@ aria-label="Toggle navigation">
   <p> Tällä sivustolla haetaan JSON-muotoista dataa</p>
  </div>
  <div id="demo" class="carousel slide" data-bs-ride="carousel">
-
+<script>
+let file = 'tietue.JSON'
+fetch (file)
+.then(function (response) {
+                 return response.json();
+})
+ .then(function (response.json){
+kerro(responseJson);
+})
+ .catch(function (error){
+  document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>";
+ })
+</script>
 </main>
 </body>
