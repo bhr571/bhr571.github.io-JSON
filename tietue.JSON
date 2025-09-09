@@ -1,54 +1,50 @@
-otsikko "JSON-datan käsittelyä"
+"otsikko": "JSON-datan käsittelyä",
 
-kuvaus "Tällä sivustolle haetaan JSON-muotoista dataa"
+"kuvaus": "Tällä sivustolle haetaan JSON-muotoista dataa",
 
-kuva "https://jaakkola.github.io/json/digi.JPG"
-
-
-opintojakso
-
-nimi "Digitekniikat"
-
-tunnus "DIG4TA021"
-
-opintopisteet 5
-
-sisalto
-
-0 "low-code"
-
-1 "sisällönhallintajärjestelmät"
-
-2 "resposiivinen käyttöliittymä ja komponentit"
-
-3 "tiedon haku julkisista palveluista rest-rajapinnan yli"
+"kuva": "https://jaakkola.github.io/json/digi.JPG",
 
 
-tekniikat
+"opintojakso": {
 
-0
+"nimi": "Digitekniikat",
 
-aihe "low-code"
+"tunnus": "DIG4TA021",
 
-linkki "https://www.weebly.com/"
+"opintopisteet": 5,
 
+"sisalto" : [
 
-1
+"low-code"
 
-aihe "wordpress"
+"sisällönhallintajärjestelmät"
 
-linkki "https://https://wordpress.com/"
+"resposiivinen käyttöliittymä ja komponentit"
 
+"tiedon haku julkisista palveluista rest-rajapinnan yli"
 
-2
+]
+}
+"tekniikat" : [
+{
+"aihe": "low-code",
 
-aihe "bootstrap"
-
-linkki "https://getbootstrap.com/"
-
-
-3
-
+"linkki": "https://www.weebly.com/"
+  },
+    {
+      "aihe": "wordpress",
+      "linkki": "https://wordpress.com/"
+    },
+    {
+      "aihe": "bootstrap",
+      "linkki": "https://getbootstrap.com/"
+    },
+    {
+      "aihe": "JSON",
+      "linkki": "https://www.json.org/json-en.html"
+    }
+  ]
+}
 aihe "JSON"
 
 linkki "https://www.json.org/json-en.html"
