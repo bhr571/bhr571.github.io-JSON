@@ -89,6 +89,7 @@ aria-label="Toggle navigation">
   <h1>JSON-datan käsittely</h1>
   <p> Tällä sivustolla haetaan JSON-muotoista dataa</p>
  </div>
+ <div id="vastaus"></div>
  <div id="demo" class="carousel slide" data-bs-ride="carousel">
  </div>
 <script>
@@ -97,7 +98,7 @@ fetch (file)
 .then(function (response) {
                  return response.json();
 })
- .then(function (response.json){
+ .then(function (responseJson){
 kerro(responseJson);
 })
  .catch(function (error){
@@ -105,8 +106,8 @@ kerro(responseJson);
  })
  function kerro(obj){
  let tiedot = "<h1>" + obj.otsikko + "</h1><br>" + obj.kuvaus + "<br>"
-+ "<p><img scr=" + obj.kuva + "></p>"
-+ "<h3>" + "Opintojakso" + </h3> + "Nimi: " + obj.opintojakso.nimi + "<br>"
++ "<p><img src=" + obj.kuva + "></p>"
++ "<h3> Opintojakso </h3>" + "Nimi: " + obj.opintojakso.nimi + "<br>"
 + "Tunnus " + obj.opintojakso.tunnus + "<br>"
 + "Opintopisteet: " + obj.opintojakso.opintopisteet + "<br>"
   
