@@ -80,7 +80,6 @@ aria-label="Toggle navigation">
 <a class="nav-link" href="saa.html">Sää</a>
 
 </li>
-
 </li>
 
 
@@ -91,40 +90,51 @@ aria-label="Toggle navigation">
 </div>
 
 </nav>
-
-
- <div id="vastaus"></div>
- <div id="demo" class="carousel slide" data-bs-ride="carousel">
- </div>
+<div>
+<h1>Sää Helsingissä</h1>
+    <p>
+        <button onclick="haeSaa()">Hae Helsingin sää</button><br>
+    </p>
+<div id="paiva"></div>
+<div id="kuva"></div>
+<div id="kuvaus"></div>
+<div id="lampotila"></div>
+<div id="vastaus"></div>
+<div id="tuuli"></div>
+</div>
 <script>
-let file = 'tietue.JSON'
-fetch (file)
-.then(function (response) {
-                 return response.json();
-})
- .then(function (responseJson){
-kerro(responseJson);
-})
-// Tässä haettiin tietueesta tietoa JSON-objectina. Se välitettiin kerro-funktiolle, joka määritetään seuraavana
- .catch(function (error){
-  document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>";
- })
- function kerro(obj){
- let tiedot = "<h1>" + obj.otsikko + "</h1><br>" + obj.kuvaus + "<br>"
-+ "<p><img src=" + obj.kuva + "></p>"
-+ "<h3> Opintojakso </h3>" + "Nimi: " + obj.opintojakso.nimi + "<br>"
-+ "Tunnus " + obj.opintojakso.tunnus + "<br>"
-+ "Opintopisteet: " + obj.opintojakso.opintopisteet + "<br>"
-+ "<b>Aiheet: </b><br>"
-// Tässä tallennetaan "tiedot" alle se data, joka halutaan myöhemmin tulostaa.
-for (var i=0; i<obj.tekniikat.length; i++) {
-tiedot += "<b>Aihe: " + obj.tekniikat[i].aihe + "</b>";
-tiedot += "<a href=" + obj.tekniikat[i].linkki + "> " + obj.tekniikat[i].linkki + "</a>" + "<br>";
-tiedot += "</p>"
-// Tässä lisätään tietoihin vielä tekniikat for-loopin kautta
-document.getElementById("vastaus").innerHTML = tiedot;
+// Luodaan ensin funktio, joka hakee säätiedot apista. Samalla se tulostaa kellonajan näkymiin, ja välittää JSON:in sää-funktiolle
+    function haeSaa(){
+const d = new Date(); 
+let tunnit = d.getHours();
+let minuutit = d.getMinutes();
+if (minuutit > 10){
+document.getElementById("paiva").innerHTML = "Sää kello " + tunnit + ":" + minuutit;
 }
- }
+if (minuutit <10){
+document.getElementById("paiva").innerHTML = "Sää kello " + tunnit + ":0" + minuutit;
+// Olisi varmaan ollut valmismetodejakin saada kellonaika XX:XX muotoon, mutta tämän sai luotua melko helposti. If lause on sitä varten, että kellonaika 12:09 ei näyttäytyisi muodossa 12:9
+}
+        fetch(`https://api.openweathermap.org/data/2.5/weather?id=658225&appid=665ecd56dfc08dbb50feb8b8f5034e28&lang=fi&units=metric`)
+    .then(function (response) {
+        return response.json();
+    })
+    .then (function (responseJson){
+    saa(responseJson);
+    })
+    .catch(function (error) {
+    document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>"
+    })
+}
+    function saa(obj) {
+        const koodi = obj.weather[0].icon;
+        const url = `https://openweathermap.org/img/wn/${koodi}@2x.png`;
+        document.getElementById("kuva").innerHTML = `<img src="${url}">`;
+        document.getElementById("kuvaus").innerHTML = "<b>Sää: <br>" + obj.weather[0].description + "</b>";
+        document.getElementById("lampotila").innerHTML = "<br><b>Lämpötila: <br>" + obj.main.temp + "°C</b><br>";
+        document.getElementById("tuuli").innerHTML = "<br><b>Tuuli: <br>" + obj.wind.speed + " m/s</b><br>";
+ // saa-funktio tulostaa loput halutut tiedot (kellonaika tuli jo aiemmassa funktiossa)
+    }
 </script>
 </main>
 </body>

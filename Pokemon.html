@@ -80,7 +80,6 @@ aria-label="Toggle navigation">
 <a class="nav-link" href="saa.html">Sää</a>
 
 </li>
-
 </li>
 
 
@@ -91,40 +90,40 @@ aria-label="Toggle navigation">
 </div>
 
 </nav>
-
-
- <div id="vastaus"></div>
- <div id="demo" class="carousel slide" data-bs-ride="carousel">
- </div>
-<script>
-let file = 'tietue.JSON'
-fetch (file)
-.then(function (response) {
-                 return response.json();
-})
- .then(function (responseJson){
-kerro(responseJson);
-})
-// Tässä haettiin tietueesta tietoa JSON-objectina. Se välitettiin kerro-funktiolle, joka määritetään seuraavana
- .catch(function (error){
-  document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pysty hakemaan</p>";
- })
- function kerro(obj){
- let tiedot = "<h1>" + obj.otsikko + "</h1><br>" + obj.kuvaus + "<br>"
-+ "<p><img src=" + obj.kuva + "></p>"
-+ "<h3> Opintojakso </h3>" + "Nimi: " + obj.opintojakso.nimi + "<br>"
-+ "Tunnus " + obj.opintojakso.tunnus + "<br>"
-+ "Opintopisteet: " + obj.opintojakso.opintopisteet + "<br>"
-+ "<b>Aiheet: </b><br>"
-// Tässä tallennetaan "tiedot" alle se data, joka halutaan myöhemmin tulostaa.
-for (var i=0; i<obj.tekniikat.length; i++) {
-tiedot += "<b>Aihe: " + obj.tekniikat[i].aihe + "</b>";
-tiedot += "<a href=" + obj.tekniikat[i].linkki + "> " + obj.tekniikat[i].linkki + "</a>" + "<br>";
-tiedot += "</p>"
-// Tässä lisätään tietoihin vielä tekniikat for-loopin kautta
-document.getElementById("vastaus").innerHTML = tiedot;
+<div>
+<h1> Pokemon haku </h1>
+    <p>
+        <input type="text" id="pokemonName" placeholder="Enter Pokemon name">
+        <button onclick="poke()">Hae</button><br>
+    <div id="nimi">Kirjoita laatikkkoon Pokemonin nimi</div>
+    <div id="kuva2"></div>
+    </p>
+</div>
+    <script>
+    // Nappia painaessa käynnistyy poke-funktio.
+    function poke(){
+    const pokeName = document.getElementById("pokemonName").value.toLowerCase();
+    let name = document.getElementById("pokemonName").value
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
+    .then(function (response) {
+        return response.json();
+    })
+    .then (function (responseJson){
+    pokekuva(responseJson);
+    //JSON-objekti välitetään pokekuva-funktioon
+    })
+    .catch(function (error) {
+    document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>"
+    })
 }
- }
+    function pokekuva(obj) {
+    const pokeurl = obj.sprites.front_default;
+    const name = obj.name;
+    document.getElementById("kuva2").innerHTML = "<img src=" + pokeurl + ">";
+    document.getElementById("nimi").innerHTML = "<b>" + name + "</b>";
+    document.getElementById("pokemonName").value = "";
+    // Tässä määritetään pokekuva-funktio, ja tuodaan halutut tiedot
+    }
 </script>
 </main>
 </body>
